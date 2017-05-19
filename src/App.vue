@@ -6,6 +6,8 @@
 
 <script>
 import Home from './components/Home'
+import Itunes from './components/Itunes'
+import MyTunes from './components/My-Tunes'
 
 export default {
   name: 'app',
