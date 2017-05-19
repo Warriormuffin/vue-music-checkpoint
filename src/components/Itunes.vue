@@ -8,12 +8,14 @@
       <div v-for='artist in this.currentArtistData' class="col-xl-6">
           <div class="card text-center">
             <div class="card-block">
-              <img :src='artist.albumUrl30' alt="">
+              <img :src="artist.artworkUrl100" alt="">
               <h3>{{artist.artistName}}</h3>
               <h4 class="card-title">{{artist.trackName}}</h4>
               <p class="card-text">{{artist.collectionName}}</p>
               <p class="card-text">{{artist.collectionPrice}}</p>
-              <a @click="addSongToMyPlaylist(artist)" class="btn btn-primary">Add To Playlist</a>
+              <audio :id="artist.trackId" controls = "controls" preload="none"><source :src="artist" type="audio/mp4"/></audio>
+              <br>
+              <a  @click="addSongToMyPlaylist(artist)" class="btn btn-primary">Add To Playlist</a>
             </div>
           </div>
       </div>
@@ -25,6 +27,7 @@
 <script>
   import ItunesService from '@/services/itunes-service'
   import MyTunesService from '@/services/mytunes-service'
+  import MyTunesComponent from './My-Tunes'
   export default {
     name: 'itunes',
     data() {
@@ -37,7 +40,6 @@
     computed: {},
     methods: {
       search() {
-        debugger
         ItunesService.getMusicByArtist(this.query).then(artistData => {
           this.currentArtistData = JSON.parse(artistData)
           this.currentArtistData = this.currentArtistData.results
@@ -45,7 +47,9 @@
         })
       },
       addSongToMyPlaylist(newlyAddedArtist){
+        debugger
         MyTunesService.addTrack(newlyAddedArtist)
+
       }
     },
     components: {}
@@ -60,5 +64,8 @@
   }
   .card-columns{
     display: inline-block
+  }
+  audio{
+    width: 220px;
   }
 </style>
