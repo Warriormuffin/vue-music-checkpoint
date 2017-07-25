@@ -5,7 +5,7 @@
       <button type='button' @click="search">Search Artist</button>
     </div> <br>
     <div class="row">
-      <div v-for='artist in this.currentArtistData' class="col-xl-6">
+      <div v-for='artist in this.currentArtistData' class="col-xl-4">
           <div class="card text-center">
             <div class="card-block">
               <img :src="artist.artworkUrl100" alt="">
@@ -13,12 +13,13 @@
               <h4 class="card-title">{{artist.trackName}}</h4>
               <p class="card-text">{{artist.collectionName}}</p>
               <p class="card-text">{{artist.collectionPrice}}</p>
-              <audio :id="artist.trackId" controls = "controls" preload="none"><source :src="artist" type="audio/mp4"/></audio>
+              <audio :id="artist.trackId" controls = "controls" preload="none"><source :src="artist.previewUrl" type="audio/mpeg"></audio>
               <br>
               <a  @click="addSongToMyPlaylist(artist)" class="btn btn-primary">Add To Playlist</a>
             </div>
           </div>
       </div>
+      <br>
     </div>
   </div>
 </template>

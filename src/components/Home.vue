@@ -5,11 +5,8 @@
         <h1 class="logo-name"><img class="logo-image" src="./../assets/logo.png" alt="">ue Music Finder</h1>
       </div>
       <div class='row'>
-        <div class="col-xl-6">
-          <itunes class="itunes"></itunes>
-        </div>
-        <div class="col-xl-6">
-          <my-tunes class="my-tunes"></my-tunes>
+        <div class="col-xl-12">
+          <router-view></router-view>
         </div>
       </div>
     </div>
@@ -52,6 +49,18 @@
   min-height: 500px;
   min-width: 45%;
 }*/
+body{
+    background-image: url(https://templeofara.net/wp-content/uploads/2015/07/wheat-field.jpg);
+    /*background-image: url(https://unsplash.it/g/1920/1080/?random);*/
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+}
 
   .logo-image {
     height: 50px;
@@ -60,4 +69,9 @@
   h1 {
     color: #35495e;
   }
+
+  .card:hover{
+  background-color: rgba(255,255,255, .8);
+
+}
 </style>

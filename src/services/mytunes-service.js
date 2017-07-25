@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-let myTunes = {}
+let myTunes = [{}]
 
 // THESE ARE SIMPLE HELPER FUNCTIONS TO KEEP YOUR MYTUNES IN LOCAL STORAGE
 // WE WILL EVENTUALLY BE REPLACING THESE GUYS BUT NOT TODAY :)
@@ -13,6 +13,7 @@ function saveMytunes() {
 
 function loadMytunes() {
   myTunes = JSON.parse(localStorage.getItem('myTunes')) || {}
+  console.log(myTunes)
 }
 
 loadMytunes()
@@ -27,13 +28,26 @@ export default {
     // TO ELIMINATE THIS PROBLEM YOU CAN USE
     Vue.set(myTunes, track.trackId, track)
     myTunes[track.trackId] = track
+    if(myTunes[track.trackId]){
+      myTunes[track.trackId].ranking = 0
+    }
     saveMytunes()
     // YOU CAN READ MORE ABOUT VUE.SET HERE
     // https://vuejs.org/v2/api/#Vue-set
    },
-  removeTrack() {
+  removeTrack(track) {
+    debugger
+    loadMytunes()
+    delete myTunes[track.trackId]
+    saveMytunes()
 
   },
-  promoteTrack() { },
-  demoteTrack() { }
+  promoteTrack(track) {
+    myTunes[track.trackId].ranking++
+    saveMytunes()
+  },
+  demoteTrack(track) {
+    myTunes[track.trackId].ranking--
+    saveMytunes()
+   }
 }
